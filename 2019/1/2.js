@@ -1,6 +1,6 @@
 /*
 
-  https://adventofcode.com/2019/day/1
+  https://adventofcode.com/2019/day/1#part2
 
 */
 
@@ -107,7 +107,10 @@ const masses = [
   82734
 ];
 
-const calcFuel = (mass) => typeof mass === 'number' ? Math.floor(mass / 3) - 2 : 0;
+const calcFuel = (mass, totalFuel = 0) => {
+  const fuel = Math.floor(mass / 3) - 2;
+  return fuel > 0 ? calcFuel(fuel, totalFuel + fuel) : totalFuel;
+};
 
 const totalFuel = masses.reduce((acc, mass) => acc + calcFuel(mass), 0);
 console.log('totalFuel', totalFuel);
