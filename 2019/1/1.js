@@ -9,4 +9,12 @@ const masses = [128398, 118177, 139790, 84818, 75859, 139920, 90212, 74975, 1208
 const calcFuel = (mass) => typeof mass === 'number' ? Math.floor(mass / 3) - 2 : 0;
 
 const totalFuel = masses.reduce((acc, mass) => acc + calcFuel(mass), 0);
-console.log('totalFuel', totalFuel);
+console.log('totalFuel, part 1', totalFuel);
+
+const calcFuelRecursive = (mass, totalFuel = 0) => {
+  const fuel = Math.floor(mass / 3) - 2;
+  return fuel > 0 ? calcFuelRecursive(fuel, totalFuel + fuel) : totalFuel;
+};
+
+const totalFuelRecursive = masses.reduce((acc, mass) => acc + calcFuelRecursive(mass), 0);
+console.log('totalFuel, part 2', totalFuelRecursive);
